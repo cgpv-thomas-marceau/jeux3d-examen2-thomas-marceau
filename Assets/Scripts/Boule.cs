@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static Unity.Cinemachine.InputAxisControllerBase<T>;
 
 /// <summary>
 /// Objet représentant une boule contrôlée par le joueur.
@@ -31,6 +32,9 @@ public class Boule : MonoBehaviour
 
     [SerializeField, Tooltip("Multiplicateur de force appliqué lors de l'accélération.")]
     float multiplicateurForceAcceleration = 15.0f;
+
+    [SerializeField, Tooltip("Nombre de piece collecter.")]
+    private int nbPieces;
 
     /// <summary>
     /// Obtient la vélocité actuelle de la boule.
@@ -112,6 +116,24 @@ public class Boule : MonoBehaviour
     public void AjouterChargeAcceleration()
     {
         gestionnaireCharge.AjouterCharge();
+    }
+
+    public void AjouterPieces()
+    {
+        nbPieces++;
+        if (nbPieces >= 5)
+        {
+            PlayerInput controles = ControleurJeu.Instance.Controles;
+            controles.actions.FindAction("ArreterInclinaison").performed += ArreterInclinaison;
+        }
+    }   
+    
+    public int GetNbPieces()
+    { 
+        return nbPieces;
+    }
+    private void ArreterInclinaison(InputAction.CallbackContext contexte)
+    {
     }
 
     private void UtiliserChargeAcceleration(InputAction.CallbackContext contexte)
