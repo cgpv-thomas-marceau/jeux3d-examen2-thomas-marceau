@@ -1,8 +1,10 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(DetecteurBoule))]
 public class Surface : MonoBehaviour
 {
+    Animation anim;
     /// <summary>
     /// Référence au détecteur de boule attaché à cette surface.
     /// </summary>
@@ -14,6 +16,7 @@ public class Surface : MonoBehaviour
     private void Awake()
     {
         Detecteur = GetComponent<DetecteurBoule>();
+        anim = GetComponent<Animation>();
     }
 
     /// <summary>
@@ -42,5 +45,10 @@ public class Surface : MonoBehaviour
             Gizmos.color = Color.green;
             Gizmos.DrawSphere(transform.position + position, 0.2f);
         }
+    }
+
+    public void ArreterAnimation()
+    {
+        anim.Stop("Incliner");
     }
 }

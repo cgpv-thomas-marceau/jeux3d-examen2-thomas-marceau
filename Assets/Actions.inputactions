@@ -120,7 +120,7 @@
                     "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Keyboard&Mouse",
+                    "groups": "",
                     "action": "ArreterInclinaison",
                     "isComposite": false,
                     "isPartOfComposite": false

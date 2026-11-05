@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static Unity.Cinemachine.InputAxisControllerBase<T>;
 
 /// <summary>
 /// Objet représentant une boule contrôlée par le joueur.
@@ -9,6 +8,9 @@ using static Unity.Cinemachine.InputAxisControllerBase<T>;
 [RequireComponent(typeof(Rigidbody))]
 public class Boule : MonoBehaviour
 {
+    [SerializeField, Tooltip("Surface")]
+    private Surface surface;
+
     [SerializeField, Tooltip("La cible pour le suvi de la caméra")]
     private Transform cibleCamera;
 
@@ -121,7 +123,8 @@ public class Boule : MonoBehaviour
     public void AjouterPieces()
     {
         nbPieces++;
-        if (nbPieces >= 5)
+        //jai it 2 a des fin de test parce que je tombe toujour avant den avoir 5
+        if (nbPieces >= 2)
         {
             PlayerInput controles = ControleurJeu.Instance.Controles;
             controles.actions.FindAction("ArreterInclinaison").performed += ArreterInclinaison;
@@ -134,6 +137,7 @@ public class Boule : MonoBehaviour
     }
     private void ArreterInclinaison(InputAction.CallbackContext contexte)
     {
+        surface.ArreterAnimation();
     }
 
     private void UtiliserChargeAcceleration(InputAction.CallbackContext contexte)
